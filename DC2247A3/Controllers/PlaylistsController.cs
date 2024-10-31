@@ -8,16 +8,23 @@ namespace DC2247A3.Controllers
 {
     public class PlaylistsController : Controller
     {
+        private Manager m = new Manager();
+
         // GET: Playlists
         public ActionResult Index()
         {
-            return View();
+            return View(m.PlaylistGetAll());
         }
 
         // GET: Playlists/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            var obj = m.PlaylistGetById(id.GetValueOrDefault());
+
+            if (obj == null)
+                return HttpNotFound();
+            else
+                return View(obj);
         }
 
         // GET: Playlists/Create

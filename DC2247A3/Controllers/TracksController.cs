@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DC2247A3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -30,22 +31,36 @@ namespace DC2247A3.Controllers
         // GET: Tracks/Create
         public ActionResult Create()
         {
-            return View();
+            var albums = m.AlbumGetAll();
+            var mediaTypes = m.MediaTypeGetAll();
+
+            
+            var formViewModel = new TrackAddFormViewModel
+            {
+                Albums = new SelectList(albums, "AlbumId", "Title"),
+                MediaTypes = new SelectList(mediaTypes, "MediaTypeId", "Name")
+            };
+
+            return View(formViewModel);
         }
 
         // POST: Tracks/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TrackAddViewModel newItem)
         {
+            if (!ModelState.IsValid)
+                return View(newItem);
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                var addedItem = m.TrackAdd(newItem);
+                if (addedItem == null)
+                    return View(newItem);
+                else
+                    return RedirectToAction("Details", new { id = addedItem.TrackId });
             }
             catch
             {
-                return View();
+                return View(newItem);
             }
         }
 

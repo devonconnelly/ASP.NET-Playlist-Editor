@@ -136,15 +136,18 @@ namespace DC2247A3.Controllers
 
         public IEnumerable<PlaylistBaseViewModel> PlaylistGetAll()
         {
-            var playlists = mapper.Map<IEnumerable<Playlist>, IEnumerable<PlaylistBaseViewModel>>(ds.Playlists);
-            return playlists.OrderBy(p => p.Name);
+            var playlists = ds.Playlists
+                .Include("Tracks");
+
+            return mapper.Map<IEnumerable<Playlist>, IEnumerable<PlaylistBaseViewModel>>(playlists)
+                .OrderBy(p => p.Name);
         }
 
 
         public PlaylistBaseViewModel PlaylistGetById(int id)
         {
             var obj = ds.Playlists
-               .Include("Track")
+               .Include("Tracks")
                .SingleOrDefault(p => p.PlaylistId == id);
 
             return obj == null ? null : mapper.Map<Playlist, PlaylistBaseViewModel>(obj);

@@ -7,17 +7,9 @@ using System.Web.Mvc;
 
 namespace DC2247A3.Models
 {
-    public class TrackAddFormViewModel
+    public class TrackAddFormViewModel : TrackAddViewModel
     {
-        [StringLength(200)]
-        public string Name { get; set; }
-
-        public decimal UnitPrice { get; set; }
-
-        public int Milliseconds { get; set; }
-
-        public int Bytes { get; set; }
-
+        
         public SelectList Albums { get; set; }
         public SelectList MediaTypes { get; set; }
     }

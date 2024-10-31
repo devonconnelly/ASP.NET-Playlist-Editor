@@ -11,6 +11,10 @@ namespace DC2247A3.Models
         public int PlaylistId { get; set; }
 
         [StringLength(120)]
+        [Display(Name = "Playlist Name")]
         public string Name { get; set; }
+
+        [Display(Name = "Playlist Track Count")]
+        public int TracksCount { get; set; }
     }
 }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DC2247A3.Models.PlaylistBaseViewModel>
+
+@{
+    ViewBag.Title = "Playlists";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<table class="table">
+    
+    <tr>
+        <hr />
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TracksCount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <span class="badge rounded-pill text-bg-secondary">@Html.DisplayFor(modelItem => item.TracksCount)</span>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
