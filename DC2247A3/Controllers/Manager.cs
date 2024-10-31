@@ -106,13 +106,11 @@ namespace DC2247A3.Controllers
 
         public TrackWithDetailViewModel TrackGetByIdWithDetail(int id)
         {
-            // Fetch the track with its associated Album, Artist, and MediaType
             var track = ds.Tracks
                           .Include("Album.Artist")
                           .Include("MediaType")
                           .SingleOrDefault(t => t.TrackId == id);
 
-            // Return the mapped view model if found; otherwise, return null
             return track == null ? null : mapper.Map<TrackWithDetailViewModel>(track);
         }
 
@@ -150,10 +148,10 @@ namespace DC2247A3.Controllers
                .Include("Tracks")
                .SingleOrDefault(p => p.PlaylistId == id);
 
-            return obj == null ? null : mapper.Map<Playlist, PlaylistBaseViewModel>(obj);
+            return obj == null ? null : mapper.Map<PlaylistBaseViewModel>(obj);
         }
 
-        public bool PlaylistEditTracks(PlaylistEditTracksViewModel updatedPlaylist)
+        public PlaylistBaseViewModel PlaylistEditTracks(PlaylistEditTracksViewModel updatedPlaylist)
         {
             var playlist = ds.Playlists
                 .Include("Track")
@@ -161,7 +159,7 @@ namespace DC2247A3.Controllers
 
             if (playlist == null)
             {
-                return false;
+                return null;
             }
 
             playlist.Tracks.Clear();
@@ -175,7 +173,7 @@ namespace DC2247A3.Controllers
             }
 
             ds.SaveChanges();
-            return true;
+            return mapper.Map<Playlist, PlaylistBaseViewModel>(playlist);
         }
 
         public IEnumerable<TrackBaseViewModel> TrackGetAll()

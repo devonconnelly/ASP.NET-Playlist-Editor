@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DC2247A3.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace DC2247A3.Models
 
         [Display(Name = "Playlist Track Count")]
         public int TracksCount { get; set; }
+
+        public ICollection<Track> Tracks { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DC2247A3.Data;
+using DC2247A3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,47 +29,42 @@ namespace DC2247A3.Controllers
                 return View(obj);
         }
 
-        // GET: Playlists/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Playlists/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         // GET: Playlists/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            var obj = m.PlaylistGetById(id.GetValueOrDefault());
+            if (obj == null)
+                return HttpNotFound();
+            var formObj = m.mapper.Map<PlaylistBaseViewModel, PlaylistEditTracksFormViewModel>(obj);
+
+            formObj.AvailableTracks = new MultiSelectList(m.TrackGetAll(), "TrackId", "NameFull");
+
+            formObj.SelectedTrackIds = obj.Tracks.Select(t => t.TrackId).ToList();
+            formObj.ExistingTracks = m.mapper.Map<ICollection<Track>, ICollection<TrackBaseViewModel>>(obj.Tracks);
+
+            return View(formObj);
         }
 
         // POST: Playlists/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, PlaylistEditTracksViewModel model)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                return RedirectToAction("Edit", new { id = model.PlaylistId });
+            }
+            if (id.GetValueOrDefault() != model.PlaylistId)
+            {
                 return RedirectToAction("Index");
             }
-            catch
+            var editedItem = m.PlaylistEditTracks(model);
+            if (editedItem == null)
             {
-                return View();
+                return RedirectToAction("Edit", new { id = model.PlaylistId });
+            }
+            else
+            {
+                return RedirectToAction("Details", new { id = model.PlaylistId });
             }
         }
 

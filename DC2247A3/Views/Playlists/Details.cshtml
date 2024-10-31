@@ -1,23 +1,20 @@
 ﻿@model DC2247A3.Models.PlaylistBaseViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Playlist details";
 }
 
-<h2>Details</h2>
+<h2>@ViewBag.Title <span class="bg-info-subtle">@Html.DisplayFor(model => model.Name)</span></h2>
+
+<hr />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
 
 <div>
-    <h4>PlaylistBaseViewModel</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PlaylistId)
-        </dt>
-
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PlaylistId)
-        </dd>
-
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -27,11 +24,15 @@
         </dd>
 
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TracksCount)
+            Tracks on the Playlist
         </dt>
 
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TracksCount)
+            <span class="badge rounded-pill text-bg-secondary">@Html.DisplayFor(model => model.TracksCount)</span><br />
+            @foreach (var track in Model.Tracks)
+            {
+                <span>@track.Name</span><br />
+            }
         </dd>
 
     </dl>
@@ -40,3 +41,4 @@
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+

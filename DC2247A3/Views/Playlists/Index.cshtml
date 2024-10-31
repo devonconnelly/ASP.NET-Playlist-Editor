@@ -30,8 +30,8 @@
                 <span class="badge rounded-pill text-bg-secondary">@Html.DisplayFor(modelItem => item.TracksCount)</span>
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.PlaylistId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.PlaylistId })
             </td>
         </tr>
     }
