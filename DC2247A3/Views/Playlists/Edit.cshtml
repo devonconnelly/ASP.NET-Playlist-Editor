@@ -43,11 +43,15 @@
             }
         </div>
         <div class="col-md-6">
-            <h5>Now on playlist <span class="badge rounded-pill text-bg-secondary">@Html.DisplayFor(model => model.ExistingTracks)</span></h5>
-            @foreach (var track in Model.ExistingTracks)
-                {
-                    @track.NameShort
-                }
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h5>Now on playlist <span class="badge rounded-pill text-bg-secondary">@Html.DisplayFor(model => model.ExistingTracks.Count)</span></h5>
+                    @foreach (var track in Model.ExistingTracks)
+                    {
+                        <span>@track.NameShort</span><br />
+                    }
+                </div>
+            </div>
         </div>
     </div>
 }
