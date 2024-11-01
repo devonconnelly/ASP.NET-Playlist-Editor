@@ -164,12 +164,15 @@ namespace DC2247A3.Controllers
             }
 
             playlist.Tracks.Clear();
-            foreach (var trackId in updatedPlaylist.SelectedTrackIds)
+            if (updatedPlaylist.SelectedTrackIds != null && updatedPlaylist.SelectedTrackIds.Any())
             {
-                var track = ds.Tracks.Find(trackId);
-                if (track != null)
+                foreach (var trackId in updatedPlaylist.SelectedTrackIds)
                 {
-                    playlist.Tracks.Add(track);
+                    var track = ds.Tracks.Find(trackId);
+                    if (track != null)
+                    {
+                        playlist.Tracks.Add(track);
+                    }
                 }
             }
 
