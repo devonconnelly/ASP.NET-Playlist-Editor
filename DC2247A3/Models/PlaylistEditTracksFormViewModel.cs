@@ -16,7 +16,7 @@ namespace DC2247A3.Models
 
         public List<int> SelectedTrackIds { get; set; }
         
-        public ICollection<TrackBaseViewModel> ExistingTracks { get; set; }
+        public ICollection<TrackBaseViewModel> Tracks { get; set; }
 
         public MultiSelectList AvailableTracks { get; set; }
     }

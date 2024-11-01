@@ -55,6 +55,7 @@ namespace DC2247A3.Controllers
                 cfg.CreateMap<PlaylistBaseViewModel, PlaylistEditTracksFormViewModel>();
 
 
+
             });
 
             mapper = config.CreateMapper();

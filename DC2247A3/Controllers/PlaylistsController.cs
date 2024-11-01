@@ -38,9 +38,7 @@ namespace DC2247A3.Controllers
             var formObj = m.mapper.Map<PlaylistBaseViewModel, PlaylistEditTracksFormViewModel>(obj);
 
             formObj.AvailableTracks = new MultiSelectList(m.TrackGetAll(), "TrackId", "NameFull");
-
             formObj.SelectedTrackIds = obj.Tracks.Select(t => t.TrackId).ToList();
-            formObj.ExistingTracks = m.mapper.Map<ICollection<Track>, ICollection<TrackBaseViewModel>>(obj.Tracks);
 
             return View(formObj);
         }
