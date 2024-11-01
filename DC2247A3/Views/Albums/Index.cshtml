@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<DC2247A3.Models.AlbumBaseViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Albums";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -22,11 +19,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AlbumId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AlbumId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AlbumId })
-        </td>
+
     </tr>
 }
 

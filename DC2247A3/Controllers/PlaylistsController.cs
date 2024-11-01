@@ -67,27 +67,5 @@ namespace DC2247A3.Controllers
                 return RedirectToAction("Details", new { id = model.PlaylistId });
             }
         }
-
-        // GET: Playlists/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Playlists/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

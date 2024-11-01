@@ -154,7 +154,7 @@ namespace DC2247A3.Controllers
         public PlaylistBaseViewModel PlaylistEditTracks(PlaylistEditTracksViewModel updatedPlaylist)
         {
             var playlist = ds.Playlists
-                .Include("Track")
+                .Include("Tracks")
                 .SingleOrDefault(p => p.PlaylistId == updatedPlaylist.PlaylistId);
 
             if (playlist == null)

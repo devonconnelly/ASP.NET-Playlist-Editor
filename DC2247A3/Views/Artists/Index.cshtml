@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<DC2247A3.Models.ArtistBaseViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Artists";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -21,11 +18,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ArtistId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ArtistId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ArtistId })
         </td>
     </tr>
 }
