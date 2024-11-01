@@ -9,10 +9,12 @@ namespace DC2247A3.Models
     public class TrackAddViewModel
     {
         [StringLength(200)]
+        [Required]
         [Display(Name = "Name")]
         public string Name { get; set; }
 
         [StringLength(220)]
+        [Required]
         public string Composer { get; set; }
 
         [Display(Name = "Unit price")]
